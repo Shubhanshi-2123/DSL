@@ -1,3 +1,9 @@
+folder('Uniticonpro') {
+    description('Folder for Uniticonpro pipelines')
+}
+
+
+
 pipelineJob('Uniticonpro/Helm-CD') {
   
     definition {
