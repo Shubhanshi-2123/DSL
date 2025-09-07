@@ -1,5 +1,4 @@
 pipelineJob('checkov') {
-    displayName('Checkov Pipeline')
     description('Pipeline job for running Checkov scan from Jenkinsfile')
 
     definition {
