@@ -4,7 +4,7 @@ job('seedjob') {
         git {
             remote {
                 url('https://github.com/ot-central-team/ci-jenkins-wrapper-code.git')
-                credentials('ayush090909')   // Jenkins credential ID
+                credentials('ayush090909/******')   // Jenkins credential ID
             }
             branch('*/main')
         }
