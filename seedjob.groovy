@@ -1,6 +1,5 @@
 job('seedjob') {
 
-    // SCM config
     scm {
         git {
             remote {
@@ -18,7 +17,6 @@ job('seedjob') {
             removeViewAction('IGNORE')               // What to do with removed views
             ignoreExisting(false)                    // Don’t ignore updates
             lookupStrategy('JENKINS_ROOT')           // Look from Jenkins root
-            sandbox(true)                            // Run in Groovy Sandbox
             ignoreMissingFiles(true)                 // Skip if file missing
         }
     }
