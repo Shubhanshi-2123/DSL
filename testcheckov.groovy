@@ -1,5 +1,4 @@
 pipelineJob('test-checkov') {
-    displayName('Test Checkov Pipeline')
     description('Pipeline to test Checkov scan using Tomcat-001 Jenkinsfile')
 
     definition {
