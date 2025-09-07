@@ -15,7 +15,7 @@ freeStyleJob('job_creator') {
         dsl {
             external('seedjobs/jobs_dsl.groovy')
             removeAction('IGNORE')   // safely ignore removed jobs/views
-            sandbox(true)            // enable Groovy sandbox
+           // sandbox(true)            // enable Groovy sandbox
             // ignoreMissingFiles is NOT valid here
         }
     }
