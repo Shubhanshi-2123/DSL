@@ -1,3 +1,6 @@
+folder('Uniticonpro') {
+    description('Folder for Uniticonpro pipelines')
+}
 pipelineJob('Uniticonpro/img-tag-ci') {
     definition {
         cps {
