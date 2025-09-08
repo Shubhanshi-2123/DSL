@@ -1,9 +1,9 @@
-// Step 1: Ensure the folder exists
 folder('AuditTool') {
     displayName('AuditTool')
 }
 
-// Step 2: Create the ScoutScan pipeline job
+
+
 pipelineJob('AuditTool/ScoutScan') {
     description('AWS ScoutSuite security scanning job')
 
@@ -14,43 +14,38 @@ pipelineJob('AuditTool/ScoutScan') {
         stringParam('EMAIL_RECIPIENT', 'your-email@example.com', 'Email address to send the report to')
     }
 
-    // Active Choices parameter using proper $class XML
+    // Active Choices parameter (using $class for reliability)
     configure { project ->
-        project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 
-            'org.biouno.unochoice.CascadeChoiceParameter'(
-                plugin: 'uno-choice@2.5'
-            ) {
-                name('AWS_REGION')
-                description('Select AWS Region')
-                choiceType('SINGLE_SELECT')
-                filterLength(1)
-                referencedParameters('')
-                script(class: 'org.biouno.unochoice.GroovyScript') {
-                    fallbackScript(class: 'org.biouno.unochoice.GroovyScript') {
-                        script('return ["us-east-1"]')
-                        sandbox(true)
-                    }
-                    script('''
-                        import groovy.json.JsonSlurper
-                        def url = 'https://ip-ranges.amazonaws.com/ip-ranges.json'
-                        def conn = new URL(url).openConnection()
-                        conn.setRequestMethod("GET")
-                        conn.connect()
-                        if (conn.responseCode != 200) {
-                            return ["Error fetching regions"]
-                        }
-                        def data = new JsonSlurper().parse(conn.inputStream)
-                        return data.prefixes.collect { it.region }.findAll { it }.unique().sort()
-                    ''')
+        project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 'org.biouno.unochoice.CascadeChoiceParameter' {
+            name('AWS_REGION')
+            description('Select AWS Region')
+            choiceType('SINGLE_SELECT')
+            filterLength(1)
+            referencedParameters('')
+            script(class: 'org.biouno.unochoice.GroovyScript') {
+                fallbackScript(class: 'org.biouno.unochoice.GroovyScript') {
+                    script('return ["us-east-1"]')
                     sandbox(true)
                 }
+                script('''
+                    import groovy.json.JsonSlurper
+                    def url = 'https://ip-ranges.amazonaws.com/ip-ranges.json'
+                    def conn = new URL(url).openConnection()
+                    conn.setRequestMethod("GET")
+                    conn.connect()
+                    if (conn.responseCode != 200) {
+                        return ["Error fetching regions"]
+                    }
+                    def data = new JsonSlurper().parse(conn.inputStream)
+                    def regions = data.prefixes.collect { it.region }.findAll { it }.unique().sort()
+                    return regions
+                ''')
+                sandbox(true)
             }
-
-        // Prevent concurrent builds
-        project / 'properties' / 'hudson.model.concurrentBuild.ConcurrentBuildProperty' << {}
+        }
     }
 
-    // Pipeline definition: read from workspace
+    // Pipeline definition
     definition {
         cps {
             script(readFileFromWorkspace('pipelines/scoutscan.groovy'))
