@@ -3,18 +3,17 @@ folder('AuditTool') {
 }
 
 pipelineJob('AuditTool/ss') {
-    description('ScoutSuite Scan job for AWS account')
+    description('AWS ScoutSuite security scanning job')
 
-    // Top-level properties block ensures Active Choices parameters appear in UI
+    // String parameters
+    parameters {
+        stringParam('ROLE_ARN', 'arn:aws:iam::370389955750:role/scout-suite-security-role', 'Enter the Role ARN to assume')
+        stringParam('ACCOUNT_NAME', 'my-aws-account', 'Name of the AWS account being scanned')
+        stringParam('EMAIL_RECIPIENT', 'your-email@example.com', 'Email address to send the report to')
+    }
+
+    // Active Choices parameter
     configure { project ->
-        project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 
-            stringParam('ACCOUNT_NAME', 'my-aws-account', 'Name of the AWS account being scanned')
-        project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 
-            stringParam('ROLE_ARN', 'arn:aws:iam::370389955750:role/scout-suite-security-role', 'Enter the Role ARN to assume')
-        project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 
-            stringParam('EMAIL_RECIPIENT', 'your-email@example.com', 'Email address to send the report to')
-
-        // Active Choices parameter
         project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 
             'org.biouno.unochoice.CascadeChoiceParameter'(
                 plugin: 'uno-choice@2.5'
@@ -45,11 +44,11 @@ pipelineJob('AuditTool/ss') {
                 }
             }
 
-        // Optional: prevent concurrent builds
+        // Prevent concurrent builds
         project / 'properties' / 'hudson.model.concurrentBuild.ConcurrentBuildProperty' << {}
     }
 
-    // Pipeline definition: call script from workspace
+    // Pipeline definition
     definition {
         cps {
             script(readFileFromWorkspace('pipelines/ss.groovy'))
