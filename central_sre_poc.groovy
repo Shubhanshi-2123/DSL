@@ -3,7 +3,7 @@ folder('central-sre-poc') {}
 folder('central-sre-poc/dev') {}
 
 pipelineJob('central-sre-poc/dev/helmUtils-pipeline') {
-    displayName('Helm Utils Pipeline')
+    displayName('HelmUtils-Pipeline')
     description('Pipeline for executing Helm utilities from shared libraries')
 
     definition {
