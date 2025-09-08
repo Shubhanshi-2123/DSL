@@ -1,5 +1,4 @@
 folder('AuditTool') {
-    displayName('Audit Tool')
     description('Folder containing all Scout Suite and audit jobs')
 }
 
