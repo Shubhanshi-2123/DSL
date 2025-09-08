@@ -1,7 +1,6 @@
 // Step 1: Ensure the folder exists
 folder('AuditTool') {
-    displayName('AuditTool Folder')
-    description('Folder for all AuditTool jobs')
+    displayName('AuditTool')
 }
 
 // Step 2: Create the ScoutScan pipeline job
