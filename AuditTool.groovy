@@ -1,21 +1,19 @@
-// Step 1: Ensure the folder exists
+// Step 1: create folder if not exist
 folder('AuditTool') {
-    displayName('AuditTool')
+    displayName('AuditTool Folder')
     description('Folder for all AuditTool jobs')
 }
 
-// Step 2: Create the ScoutScan pipeline job
+// Step 2: create pipeline job inside folder
 pipelineJob('AuditTool/ScoutScan') {
     description('AWS ScoutSuite security scanning job')
 
-    // String parameters
     parameters {
         stringParam('ROLE_ARN', 'arn:aws:iam::370389955750:role/scout-suite-security-role', 'Enter the Role ARN to assume')
         stringParam('ACCOUNT_NAME', 'my-aws-account', 'Name of the AWS account being scanned')
         stringParam('EMAIL_RECIPIENT', 'your-email@example.com', 'Email address to send the report to')
     }
 
-    // Active Choices parameter for AWS_REGION
     configure { project ->
         project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 'org.biouno.unochoice.CascadeChoiceParameter' {
             name('AWS_REGION')
@@ -44,38 +42,12 @@ pipelineJob('AuditTool/ScoutScan') {
                 sandbox(true)
             }
         }
-        // Prevent concurrent builds
-        project / 'properties' / 'hudson.model.concurrentBuild.ConcurrentBuildProperty' << {}
     }
 
-    // Pipeline definition: read from workspace
     definition {
         cps {
             script(readFileFromWorkspace('pipelines/scoutscan.groovy'))
             sandbox()
         }
-    }
-}
-
-// Step 3: Create the scoutscuite-gcp pipeline job
-pipelineJob('AuditTool/scoutscuite-gcp') {
-    description('GCP ScoutSuite scanning job')
-
-    // Multi-line string parameter for GCP service account
-    parameters {
-        textParam('SA_KEY_CONTENT', '', 'Paste the content of your GCP service account JSON key here')
-    }
-
-    // Pipeline definition: read from workspace
-    definition {
-        cps {
-            script(readFileFromWorkspace('pipelines/scoutscuite-gcp.groovy'))
-            sandbox()
-        }
-    }
-
-    // Prevent concurrent builds
-    configure { project ->
-        project / 'properties' / 'hudson.model.concurrentBuild.ConcurrentBuildProperty' << {}
     }
 }
