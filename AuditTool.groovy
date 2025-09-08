@@ -88,6 +88,10 @@
 //         }
 //     }
 // }
+folder('AuditTool') {
+    displayName('AuditTool Folder')
+    description('Folder for all AuditTool jobs')
+}
 
 pipelineJob('AuditTool/ScoutScan') {
     description('AWS ScoutSuite security scanning job')
