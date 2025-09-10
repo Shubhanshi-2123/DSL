@@ -7,7 +7,7 @@ def githubCredId = 'github-jenkins-creds'
 
 // === Attendance API Pipeline ===
 pipelineJob('COE/CI/OT-Microservices/Attendence-Api-Pipeline') {
-    displayName('Attendance API Pipeline')
+    displayName('Attendance-API-Pipeline')
     description('CI pipeline for the Attendance API microservice')
 
     definition {
@@ -28,7 +28,7 @@ pipelineJob('COE/CI/OT-Microservices/Attendence-Api-Pipeline') {
 
 // === Employee API Pipeline ===
 pipelineJob('COE/CI/OT-Microservices/Employee-Api-Pipeline') {
-    displayName('Employee API Pipeline')
+    displayName('Employee-API-Pipeline')
     description('CI pipeline for the Employee API microservice')
 
     definition {
@@ -49,7 +49,7 @@ pipelineJob('COE/CI/OT-Microservices/Employee-Api-Pipeline') {
 
 // === Salary API Pipeline ===
 pipelineJob('COE/CI/OT-Microservices/Salary-Api-Pipeline') {
-    displayName('Salary API Pipeline')
+    displayName('Salary-API-Pipeline')
     description('CI pipeline for the Salary API microservice')
 
     definition {
