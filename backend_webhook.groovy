@@ -28,10 +28,6 @@ multibranchPipelineJob('COE/CI/SentryFuse/Backend-Webhook') {
         }
     }
 
-    triggers {
-        githubPush() // webhook trigger
-    }
-
     factory {
         workflowBranchProjectFactory {
             scriptPath('backend-webhook/Jenkinsfile')
