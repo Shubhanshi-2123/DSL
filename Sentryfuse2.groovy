@@ -38,10 +38,10 @@ pipelineJob('COE/CI/SentryFuse/Backend-Consumer') {
     //     disableConcurrentBuilds()
     // }
 
-    configure { project ->
-        // GitHub webhook trigger for SCM polling
-        project / triggers << 'com.cloudbees.jenkins.GitHubPushTrigger' {
-            spec ''
-        }
-    }
+    // configure { project ->
+    //     // GitHub webhook trigger for SCM polling
+    //     project / triggers << 'com.cloudbees.jenkins.GitHubPushTrigger' {
+    //         spec ''
+    //     }
+    // }
 }
