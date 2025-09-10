@@ -19,13 +19,7 @@ pipelineJob('COE/CI/AI-Tools/Gen-BI') {
                         credentials(githubCredId)
                     }
                     branch('*/JenkinsCI')
-                    extensions { 
-                        // Lightweight checkout
-                        cloneOptions {
-                            shallow(true)
-                            depth(1)
-                        }
-                    }
+                   
                 }
             }
             scriptPath('Jenkinsfile.CI')
