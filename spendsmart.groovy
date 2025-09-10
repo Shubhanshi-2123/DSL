@@ -1,10 +1,33 @@
-folder('COE/SpendSmart/AWS/Cost-Tracker/HRC') {
-    displayName('HRC')
-    description('Jobs related to HRC Daily Cost Tracking')
+folder('COE') {
+    displayName('COE')
+    description('All COE related jobs')
 }
 
+folder('COE/SpendSmart') {
+    displayName('SpendSmart')
+    description('SpendSmart related jobs')
+}
+
+folder('COE/SpendSmart/AWS') {
+    displayName('AWS')
+    description('AWS related SpendSmart jobs')
+}
+
+folder('COE/SpendSmart/AWS/Cost-Tracker') {
+    displayName('Cost Tracker')
+    description('Cost tracking jobs')
+}
+
+folder('COE/SpendSmart/AWS/Cost-Tracker/HRC') {
+    displayName('HRC')
+    description('HRC specific cost tracking jobs')
+}
+
+
 pipelineJob('COE/SpendSmart/AWS/Cost-Tracker/HRC/Daily-Cost-Job') {
-    
+    description('HRC Daily Cost Tracker job using shared Jenkinsfile')
+
+    // Disable concurrent builds
     configure { project ->
         project / 'properties' << 'org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty'()
     }
