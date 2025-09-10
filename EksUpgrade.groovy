@@ -1,4 +1,3 @@
-
 folder('COE') {
     displayName('COE')
     description('All COE related jobs')
@@ -21,16 +20,20 @@ pipelineJob('COE/k8s/Eks-Upgrade/EKS-UPGRADE') {
         numToKeep(50)
     }
 
-    // Disable concurrent builds correctly for pipelineJob
+    // Use configure block to add unsupported parameter and disable concurrency
     configure { project ->
+        // Disable concurrent builds
         project / 'properties' / 'hudson.model.concurrent.ConcurrencyThrottleJobProperty' {
             maxConcurrentPerNode(1)
             maxConcurrentTotal(1)
         }
-    }
 
-    parameters {
-        base64File(name: 'cluster_properties_yamlfile', description: 'Upload your cluster YAML file')
+        // Add Base64 File Parameter (plugin must be installed)
+        project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 'org.jenkinsci.plugins.base64parameter.Base64ParameterDefinition' {
+            name('cluster_properties_yamlfile')
+            description('Upload your cluster YAML file')
+            defaultValue('')
+        }
     }
 
     definition {
