@@ -4,7 +4,6 @@ folder('Teleport') {}
 
 pipelineJob('Teleport/ansible-role-execution') {
     displayName('ansible-role-execution')
-    description('Pipeline for executing Ansible roles')
 
     // Log rotation
     logRotator {
