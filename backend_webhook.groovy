@@ -16,7 +16,7 @@ multibranchPipelineJob('COE/CI/SentryFuse/Backend-Webhook') {
             id('backend-webhook') // unique ID for this branch source
             repoOwner('OT-COE')
             repository('SentryFuse')
-            credentialsId(githubCredId)
+            scanCredentialsId(githubCredId) // corrected method
             traits {
                 branchDiscovery { strategyId(1) } // discover all branches
             }
