@@ -9,7 +9,7 @@ pipelineJob('COE/CI/AI-Tools/Postgres-MCP') {
 
     definition {
         cps {
-            script(readFileFromWorkspace('pipelines/postgres.groovy'))
+            script(readFileFromWorkspace('pipelines/postgres_mcp.groovy'))
             sandbox(true) // enable Groovy sandbox
         }
     }
