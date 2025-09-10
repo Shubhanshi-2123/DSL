@@ -18,7 +18,9 @@ pipelineJob('COE/command-center/K8S/user-creation-2') {
     }
 
     // Disable concurrent builds
-    concurrentBuild(false)
+    configure { project ->
+        project / 'properties' << 'org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty'()
+    }
 
     parameters {
         stringParam('USERNAME', 'pritam', 'Kubernetes username to create')
