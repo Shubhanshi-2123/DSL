@@ -14,9 +14,9 @@ pipelineJob('COE/CI/SentryFuse/Backend-Api') {
     }
 
     // === Disable Concurrent Builds ===
-    properties {
-        disableConcurrentBuilds()
-    }
+    // properties {
+    //     disableConcurrentBuilds()
+    // }
 
     // === Pipeline SCM Configuration ===
     definition {
@@ -39,7 +39,7 @@ pipelineJob('COE/CI/SentryFuse/Backend-Api') {
     }
 
     // === Triggers ===
-    triggers {
-        githubPush()
-    }
+    // triggers {
+    //     githubPush()
+    // }
 }
