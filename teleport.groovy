@@ -15,7 +15,7 @@ pipelineJob('Teleport/ansible-role-execution') {
     // Pipeline script (inline)
     definition {
         cps {
-            script(readFileFromWorkspace('pipelines/ansible-role-execution.groovy')) // adjust path as needed
+            script(readFileFromWorkspace('pipelines/ansible_role_execution.groovy')) // adjust path as needed
             sandbox(true) // Groovy sandbox enabled
         }
     }
