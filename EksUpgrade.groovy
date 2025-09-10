@@ -21,7 +21,7 @@ pipelineJob('COE/k8s/Eks-Upgrade/EKS-UPGRADE') {
         numToKeep(50)
     }
     
-    concurrentBuild(false)
+   disableConcurrentBuilds()
     
     parameters {
         base64File(name: 'cluster_properties_yamlfile', description: 'Upload your cluster YAML file')
