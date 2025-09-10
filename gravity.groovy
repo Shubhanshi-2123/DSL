@@ -4,24 +4,38 @@ folder('COE') {
 
 pipelineJob('COE/Graviton-Compatibility-Scan') {
 
-
     logRotator {
         numToKeep(5)
     }
 
-    // Disable concurrent builds for pipelineJob
+    // Disable concurrent builds in a version-agnostic way
     configure { project ->
         project / 'properties' << 'org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty'()
+        
+        // Add parameters manually
+        def params = project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions'
+        
+        params << 'hudson.model.StringParameterDefinition' {
+            name('REPO_URL')
+            description('Git repository to scan')
+            defaultValue('')
+        }
+        params << 'hudson.model.BooleanParameterDefinition' {
+            name('IS_PRIVATE_REPO')
+            description('Is the repo private?')
+            defaultValue(false)
+        }
+        params << 'hudson.model.StringParameterDefinition' {
+            name('GIT_USERNAME')
+            description('Git username (for private repo)')
+            defaultValue('')
+        }
+        params << 'hudson.model.PasswordParameterDefinition' {
+            name('GIT_TOKEN')
+            description('Git token/password (for private repo)')
+            defaultValue('')
+        }
     }
-    concurrentBuild(false)
-
-    parameters {
-        stringParam('REPO_URL', '', 'Git repository to scan')
-        booleanParam('IS_PRIVATE_REPO', false, 'Is the repo private?')
-        stringParam('GIT_USERNAME', '', 'Git username (for private repo)')
-        passwordParam('GIT_TOKEN', 'Git token/password (for private repo)')
-    }
-
 
     definition {
         cps {
