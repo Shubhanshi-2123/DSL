@@ -3,7 +3,7 @@ folder('COE') {}
 folder('COE/Cluster-User-creation') {}
 
 pipelineJob('COE/Cluster-User-creation/user-creation-2') {
-    displayName('Cluster User Creation - user-creation-2')
+    displayName('user-creation-2')
     description('Pipeline job for creating users in the cluster via K8s Jenkinsfile')
 
     definition {
