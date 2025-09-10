@@ -13,14 +13,14 @@ pipelineJob('COE/Graviton-Compatibility-Scan') {
     configure { project ->
         project / 'properties' << 'org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty'()
     }
+    concurrentBuild(false)
 
-  parameters {
+    parameters {
         stringParam('REPO_URL', '', 'Git repository to scan')
         booleanParam('IS_PRIVATE_REPO', false, 'Is the repo private?')
         stringParam('GIT_USERNAME', '', 'Git username (for private repo)')
-        passwordParam('GIT_TOKEN', '', 'Git token/password (for private repo)')
+        passwordParam('GIT_TOKEN', 'Git token/password (for private repo)')
     }
-
 
 
     definition {
