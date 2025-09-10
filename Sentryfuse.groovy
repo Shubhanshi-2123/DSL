@@ -8,7 +8,7 @@ def githubCredId = 'sharvarikhamkar1304-creds' // replace with actual credential
 
 // === Backend API ===
 pipelineJob('COE/CI/SentryFuse/Backend-Api') {
-    displayName('Backend API')
+    displayName('Backend-API')
     description('CI/CD pipeline for the SentryFuse Backend API')
 
     definition {
@@ -50,7 +50,7 @@ pipelineJob('COE/CI/SentryFuse/Backend-Api') {
 
 // === Backend Consumer ===
 pipelineJob('COE/CI/SentryFuse/Backend-Consumer') {
-    displayName('Backend Consumer')
+    displayName('Backend-Consumer')
     description('CI/CD pipeline for the SentryFuse Backend Consumer')
 
     definition {
