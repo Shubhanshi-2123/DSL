@@ -39,7 +39,7 @@ pipelineJob('COE/CI/SentryFuse/Backend-Api') {
     }
 
     // === Triggers ===
-    // triggers {
-    //     githubPush()
-    // }
+    triggers {
+        githubPush()
+    }
 }
