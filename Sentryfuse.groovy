@@ -88,9 +88,17 @@
 //     }
 // }
 // === Folder Structure ===
-folder('COE') {}
-folder('COE/CI') {}
-folder('COE/CI/SentryFuse') {}
+folder('COE') {
+  
+}
+
+folder('COE/CI') {
+
+}
+
+folder('COE/CI/SentryFuse') {
+
+}
 
 def repoUrl = 'https://github.com/OT-COE/SentryFuse.git'
 def githubCredId = 'sharvarikhamkar1304-creds' // replace with actual credential ID
