@@ -9,7 +9,7 @@ pipelineJob('Teleport/ansible-role-execution') {
     // Log rotation
     logRotator {
         daysToKeep(3)      
-        numToKeep(null)    
+      
     }
 
     // Pipeline script (inline)
