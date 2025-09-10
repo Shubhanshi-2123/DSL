@@ -16,8 +16,7 @@ multibranchPipelineJob('COE/CI/SentryFuse/Backend-Webhook') {
             id('backend-webhook-github') // unique ID
             repoOwner('OT-COE')
             repository('SentryFuse')
-            credentialsId(githubCredId)
-            scanCredentialsId(githubCredId)
+            scanCredentialsId('sharvarikhamkar1304-creds') // correct method
             includes('*') // build all branches
         }
     }
@@ -29,7 +28,9 @@ multibranchPipelineJob('COE/CI/SentryFuse/Backend-Webhook') {
         }
     }
 
-   
+    triggers {
+        githubPush() // webhook trigger
+    }
 
     factory {
         workflowBranchProjectFactory {
