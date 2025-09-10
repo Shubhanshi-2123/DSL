@@ -3,8 +3,7 @@ folder('COE') {}
 folder('COE/CI') {}
 folder('COE/CI/SentryFuse') {}
 
-def repoUrl = 'https://github.com/OT-COE/SentryFuse.git'
-def githubCredId = 'sharvarikhamkar1304-creds' // replace with actual credential ID
+def githubCredId = 'sharvarikhamkar1304-creds'
 
 // === Backend Webhook Multibranch Pipeline ===
 multibranchPipelineJob('COE/CI/SentryFuse/Backend-Webhook') {
@@ -16,8 +15,8 @@ multibranchPipelineJob('COE/CI/SentryFuse/Backend-Webhook') {
             id('backend-webhook-github') // unique ID
             repoOwner('OT-COE')
             repository('SentryFuse')
-            scanCredentialsId(githubCredId) // use scanCredentialsId
-            includes('main') // only main branch
+            scanCredentialsId(githubCredId)
+            includes('main') // only build main branch
         }
     }
 
@@ -32,11 +31,5 @@ multibranchPipelineJob('COE/CI/SentryFuse/Backend-Webhook') {
         workflowBranchProjectFactory {
             scriptPath('backend-webhook/Jenkinsfile')
         }
-    }
-
-    // Disable all optional flags to match UI defaults
-    configure { node ->
-        node / triggers.clear() // remove default triggers
-        node / 'properties'.replaceNode {} // remove project-based security or other properties
     }
 }
