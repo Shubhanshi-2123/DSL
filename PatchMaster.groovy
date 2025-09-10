@@ -9,7 +9,7 @@ def jenkinsCredId = 'ssh-key-OT-COE-org'
 
 // === Backend API ===
 multibranchPipelineJob('COE/CI/COE-Tools/Orchestrator/PatchMaster-Backend-API') {
-    displayName('PatchMaster - Backend API')
+    displayName('Backend API')
     description('Multibranch pipeline for the Backend API module of PatchMaster')
 
     branchSources {
@@ -54,8 +54,8 @@ multibranchPipelineJob('COE/CI/COE-Tools/Orchestrator/PatchMaster-Backend-API') 
 }
 
 // === Backend Consumer ===
-multibranchPipelineJob('COE/CI/COE-Tools/Orchestrator/PatchMaster-Backend-Consumer') {
-    displayName('PatchMaster - Backend Consumer')
+multibranchPipelineJob('COE/CI/COE-Tools/Orchestrator/Backend Consumer') {
+    displayName('Backend Consumer')
     description('Multibranch pipeline for the Backend Consumer module of PatchMaster')
 
     branchSources {
@@ -100,9 +100,8 @@ multibranchPipelineJob('COE/CI/COE-Tools/Orchestrator/PatchMaster-Backend-Consum
 }
 
 // === Orchestrator Frontend ===
-pipelineJob('COE/CI/COE-Tools/Orchestrator/Orchestrator-Frontend') {
-    displayName('Orchestrator Frontend')
-    description('Pipeline job for the Orchestrator UI component')
+pipelineJob('COE/CI/COE-Tools/Orchestrator/Orchestrator_Frontend') {
+    displayName('Orchestrator_Frontend')
 
     definition {
         cpsScm {
