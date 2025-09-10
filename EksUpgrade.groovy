@@ -15,25 +15,21 @@ folder('COE/k8s/Eks-Upgrade') {
 
 pipelineJob('COE/k8s/Eks-Upgrade/EKS-UPGRADE') {
     description('EKS Upgrade job using shared library Jenkinsfile')
-    logRotator {
-        daysToKeep(30)
-        numToKeep(50)
-    }
 
-    // Use configure block to add unsupported parameter and disable concurrency
+    // Disable concurrent builds via configure block
     configure { project ->
-        // Disable concurrent builds
         project / 'properties' / 'hudson.model.concurrent.ConcurrencyThrottleJobProperty' {
             maxConcurrentPerNode(1)
             maxConcurrentTotal(1)
         }
 
-        // Add Base64 File Parameter (plugin must be installed)
-        project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 'org.jenkinsci.plugins.base64parameter.Base64ParameterDefinition' {
-            name('cluster_properties_yamlfile')
-            description('Upload your cluster YAML file')
-            defaultValue('')
-        }
+        // Add Base64 File Parameter
+        project / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions' << 
+            'org.jenkinsci.plugins.base64parameter.Base64ParameterDefinition' {
+                name('cluster_properties_yamlfile')
+                description('Upload your cluster YAML file')
+                defaultValue('')
+            }
     }
 
     definition {
