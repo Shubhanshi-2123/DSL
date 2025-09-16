@@ -32,10 +32,10 @@ pipelineJob('COE/k8s/Eks-Upgrade/Eks-TF-Upgrade') {
             }
     }
 
-    definition {
-        cps {
-            script(readFileFromWorkspace('pipelines/Eks_tf_upgrade.groovy'))
-            sandbox(true) // same as "Use Groovy Sandbox" in UI
-        }
-    }
+    // definition {
+    //     cps {
+    //         script(readFileFromWorkspace('pipelines/Eks_tf_upgrade.groovy'))
+    //         sandbox(true) // same as "Use Groovy Sandbox" in UI
+    //     }
+    // }
 }
