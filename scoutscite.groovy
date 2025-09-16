@@ -16,7 +16,7 @@ pipelineJob('AuditTool/scoutscuite-gcp') {
     // Pipeline definition: read Groovy script from workspace
     definition {
         cps {
-            script(readFileFromWorkspace('pipelines/scoutscuite-gcp.groovy'))
+            script(readFileFromWorkspace('pipelines/scoutscuite_gcp.groovy'))
             sandbox()
         }
     }
